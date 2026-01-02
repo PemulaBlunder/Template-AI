@@ -42,160 +42,99 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            width: 100%;
-            max-width: 450px;
-        }
-        
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 30px;
-            font-size: 28px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: 500;
-        }
-        
-        input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-        
-        input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        
-        button {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        
-        button:hover {
-            transform: translateY(-2px);
-        }
-        
-        .alert {
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-        
-        .alert-error {
-            background: #fee;
-            color: #c33;
-            border: 1px solid #fcc;
-        }
-        
-        .alert-success {
-            background: #efe;
-            color: #3c3;
-            border: 1px solid #cfc;
-        }
-        
-        .login-link {
-            text-align: center;
-            margin-top: 20px;
-            color: #666;
-        }
-        
-        .login-link a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        .login-link a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+
+    <link rel="stylesheet" href="login_style_legacy.css" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght,YOPQ@500,300&display=swap" rel="stylesheet" />
 </head>
+
 <body>
     <div class="container">
-        <h2>📝 Daftar Akun</h2>
-        
-        <?php if ($error): ?>
+        <div class="left-panel">
+            <!-- Sidebar -->
+            <div class="side-nav">
+                <div class="side-text">
+                    <div class="side-line mb-44"></div>
+                    <div class="side-text mb-15">
+                        <span>EN</span>
+                    </div>
+                    <div class="side-line26 mb-15"></div>
+                    <div class="side-text mb-44">
+                        <span class="active">ID</span>
+                    </div>
+                    <span>HELP</span>
+                </div>
+            </div>
+
+            <!-- Logo -->
+            <div class="logo">
+                <h1>LEVITAS</h1>
+            </div>
+
+            <?php if ($error): ?>
             <div class="alert alert-error"><?php echo $error; ?></div>
-        <?php endif; ?>
-        
-        <?php if ($success): ?>
+            <?php endif; ?>
+
+            <?php if ($success): ?>
             <div class="alert alert-success"><?php echo $success; ?></div>
-        <?php endif; ?>
-        
-        <form method="POST">
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" name="username" value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>" required>
+            <?php endif; ?>
+
+            <form method="POST">
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" name="username"
+                        value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>"
+                        required />
+                </div>
+
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" name="email"
+                        value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>"
+                        required />
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" name="password" required />
+                </div>
+
+                <div class="input-group">
+                    <label>Konfirmasi Password</label>
+                    <input type="password" name="confirm_password" required />
+                </div>
+
+                <button type="submit" class="btn primary-btn">Daftar</button>
+            </form>
+            <div class="links">
+                Sudah punya akun?
+                <a href="login.php" class="link">Login di sini</a>
             </div>
-            
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" required>
+
+            <!-- ================= SOCIAL ICONS ================= -->
+            <div class="social-icons">
+                <a href="#"><img src="image/gmail.png" alt="Gmail" /></a>
+                <a href="#"><img src="image/instagram.png" alt="Instagram" /></a>
+                <a href="#"><img src="image/linkedin.png" alt="LinkedIn" /></a>
             </div>
-            
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password" required>
-            </div>
-            
-            <div class="form-group">
-                <label>Konfirmasi Password</label>
-                <input type="password" name="confirm_password" required>
-            </div>
-            
-            <button type="submit">Daftar</button>
-        </form>
-        
-        <div class="login-link">
-            Sudah punya akun? <a href="login.php">Login di sini</a>
+
+            <!-- ================= FOOTER ================= -->
+            <footer class="footer">
+                <a href="#" class="footer-link">Legal Stuff</a>
+                <span class="dot">·</span>
+                <a href="#" class="footer-link">Blogs</a>
+                <span class="dot">·</span>
+                <a href="#" class="footer-link">Terms</a>
+                <div class="footer-line"></div>
+            </footer>
         </div>
     </div>
 </body>
+
 </html>

@@ -1,0 +1,350 @@
+/* ===============================
+   Reset dan setup dasar
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Kumbh Sans", sans-serif;
+  height: 100vh;
+  background-image: url("image/login.png");
+  color: #333;
+  overflow: hidden;
+}
+
+/* ===============================
+   Container utama
+================================ */
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* ===============================
+   Panel Kiri: Login
+================================ */
+.left-panel {
+  position: relative;
+  width: 481px;
+  background-color: #f9f9f9;
+  padding: 50px 30px 40px 60px; /* ruang kiri untuk sidebar */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ===============================
+   Sidebar kiri (GARIS + TEXT)
+================================ */
+.side-nav {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-64%);
+  display: flex;
+  align-items: center;
+}
+
+.side-line {
+  width: 2px;
+  height: 200px;
+  background-color: #0a1a44;
+  margin-right: 0px;
+}
+
+.side-line26 {
+  width: 2px;
+  height: 26px;
+  background-color: #0a1a44;
+  margin-right: 0px;
+}
+
+.side-text {
+  display: flex;
+  font-family: "Kumbh Sans", sans-serif;
+  flex-direction: column;
+  align-items: center;
+}
+
+.side-text span {
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  color: #999;
+
+  transform: rotate(-90deg);
+  transform-origin: center;
+
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.mb-44 {
+  margin-bottom: 40px;
+}
+.mb-15 {
+  margin-bottom: 15px;
+}
+
+.side-text span:hover {
+  color: #00ff88;
+}
+
+.side-text .active {
+  color: #0a1a44;
+  font-weight: 700;
+}
+
+/* ===============================
+   Logo
+================================ */
+.logo h1 {
+  font-family: "Jaro", sans-serif;
+  font-size: 5rem; /* Jaro cocok agak besar */
+  color: #02103e;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 3px; /* Jaro enak dilebarin */
+}
+
+/* ===============================
+   Form
+================================ */
+form {
+  width: 100%;
+}
+
+.input-group {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  font-size: 0.85rem; /* lebih kecil */
+  font-weight: 500; /* SEMI, bukan bold */
+  color: #4a4a4a; /* lebih soft */
+  margin-bottom: 6px;
+  display: block;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-group input:focus {
+  border-color: #00ff88;
+  box-shadow: 0 0 0 2px rgba(0, 255, 136, 0.2);
+  outline: none;
+}
+
+/* ===============================
+   Password toggle
+================================ */
+.password-container {
+  position: relative;
+}
+
+.toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #00ff88;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+/* ===============================
+   Error text
+================================ */
+.alert-error {
+    padding: 12px;
+    background: #fee;
+    color: #c33;
+    border: 1px solid #fcc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 16px; /* <- di sini ukurannya */
+    font-weight: 600; /* opsional, buat lebih tegas */
+}
+
+/* ===============================
+   Button
+================================ */
+.btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 6px; /* ⬅️ lebih rapat */
+  transition: all 0.3s ease;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 14px 0; /* ⬅️ dari 25px → 14px */
+  color: #02103e;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background-color: #02103e;
+}
+
+.divider::before {
+  margin-right: 12px;
+}
+
+.divider::after {
+  margin-left: 12px;
+}
+
+.divider span {
+  font-weight: 600;
+}
+
+.primary-btn {
+  background-color: #171c2b;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.primary-btn:hover {
+  background-color: #00cc66;
+}
+
+/* ===============================
+   Links
+================================ */
+.links {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.link {
+  color: #00ff88;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* ===============================
+   Footer kiri bawah
+================================ */
+.footer {
+  margin-top: auto;
+  margin-bottom: -10px;
+  margin-left: -20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.footer-link {
+  color: #777;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #0a1a44;
+  text-decoration: underline;
+}
+
+.dot {
+  color: #aaa;
+}
+
+/* GARIS DI SAMPING "TERMS" */
+.footer-line {
+  margin-left: 10px;
+  width: 60px;
+  height: 2px;
+  background-color: #0a1a44;
+}
+
+/* ===============================
+   Panel Kanan: Background
+================================ */
+.right-panel {
+  width: 62%;
+  background-image: url("image/game-pattern-panel.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.right-panel {
+  position: relative;
+  flex: 1;
+}
+
+/* posisi icon */
+.social-icons {
+  position: absolute;
+  bottom: 25px;
+  right: 25px; /* ⬅️ INI KUNCINYA */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.social-icons img {
+  width: 21px;
+  height: 21px;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.social-icons img:hover {
+  transform: scale(1.15);
+  opacity: 0.8;
+}
+
+/* ===============================
+   Responsive
+================================ */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left-panel,
+  .right-panel {
+    width: 100%;
+    height: 50%;
+    padding: 40px;
+  }
+
+  .side-nav {
+    display: none;
+  }
+
+  /* ini buat pagenya */
+}
+.hidden {
+  display: none;
+}
