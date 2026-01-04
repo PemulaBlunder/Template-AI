@@ -394,6 +394,13 @@ if (isset($_POST['update_photo']) && isset($_FILES['photo'])) {
                 </div>
             </a>
 
+            <a href="../auth/change_password.php" class="card-link">
+                <div class="card game-card">
+                    <h3>Change Password</h3>
+                    <p>Klik Rubah Password</p>
+                </div>
+            </a>
+
             <a href="../Game/Snake/index_snake.html" class="card-link">
                 <div class="card game-card">
                     <h3>🎮 Mainkan Game Ular</h3>
