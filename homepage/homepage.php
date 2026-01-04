@@ -1,9 +1,9 @@
 <?php
-require_once 'config.php';
+require_once '../databases/config.php';
 
 // Cek apakah user sudah login
 if (!isLoggedIn()) {
-    redirect('login.php');
+    redirect('../auth/login.php');
 }
 
 // Ambil data user
@@ -15,7 +15,7 @@ $error = '';
 // Handle logout
 if (isset($_GET['action']) && $_GET['action'] == 'logout') {
     session_destroy();
-    redirect('login.php');
+    redirect('../auth/login.php');
 }
 
 // Handle update username
@@ -80,7 +80,7 @@ if (isset($_POST['update_photo']) && isset($_FILES['photo'])) {
         if (in_array($file_ext, $allowed)) {
             if ($file['size'] <= 5000000) { // 5MB
                 // Buat folder jika belum ada
-                $upload_dir = 'uploads/users/';
+                $upload_dir = '../uploads/users/';
                 if (!is_dir($upload_dir)) {
                     mkdir($upload_dir, 0777, true);
                 }
@@ -91,7 +91,7 @@ if (isset($_POST['update_photo']) && isset($_FILES['photo'])) {
                 
                 if (move_uploaded_file($file['tmp_name'], $upload_path)) {
                     // Hapus foto lama jika bukan default
-                    if ($user['photo'] != 'uploads/users/default.png' && file_exists($user['photo'])) {
+                    if ($user['photo'] != '../uploads/users/default.png' && file_exists($user['photo'])) {
                         unlink($user['photo']);
                     }
                     
@@ -319,7 +319,7 @@ if (isset($_POST['update_photo']) && isset($_FILES['photo'])) {
     <div class="container">
         <div class="header">
             <div class="user-info">
-                <img src="<?php echo file_exists($user['photo']) ? htmlspecialchars($user['photo']) : 'uploads/users/default.png'; ?>"
+                <img src="<?php echo file_exists($user['photo']) ? htmlspecialchars($user['photo']) : '../uploads/users/default.png'; ?>"
                     alt="Profile" class="profile-photo"
                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23667eea%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22white%22 font-size=%2240%22 font-family=%22Arial%22%3E<?php echo strtoupper(substr($user['username'], 0, 1)); ?>%3C/text%3E%3C/svg%3E'">
                 <div class="user-details">
@@ -375,7 +375,7 @@ if (isset($_POST['update_photo']) && isset($_FILES['photo'])) {
             <!-- Card Ubah Foto Profil -->
             <div class="card">
                 <h3>📸 Ubah Foto Profil</h3>
-                <img src="<?php echo file_exists($user['photo']) ? htmlspecialchars($user['photo']) : 'uploads/users/default.png'; ?>"
+                <img src="<?php echo file_exists($user['photo']) ? htmlspecialchars($user['photo']) : '../uploads/users/default.png'; ?>"
                     alt="Current Photo" class="preview-photo"
                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23667eea%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22white%22 font-size=%2240%22 font-family=%22Arial%22%3E<?php echo strtoupper(substr($user['username'], 0, 1)); ?>%3C/text%3E%3C/svg%3E'">
                 <form method="POST" enctype="multipart/form-data">
@@ -387,21 +387,21 @@ if (isset($_POST['update_photo']) && isset($_FILES['photo'])) {
                 </form>
             </div>
 
-            <a href="Game/Tetoris/index_tetris.html" class="card-link">
+            <a href="../Game/Tetoris/index_tetris.html" class="card-link">
                 <div class="card game-card">
                     <h3>🎮 Mainkan Game Tetris</h3>
                     <p>Klik untuk bermain</p>
                 </div>
             </a>
 
-            <a href="Game/Snake/index_snake.html" class="card-link">
+            <a href="../Game/Snake/index_snake.html" class="card-link">
                 <div class="card game-card">
                     <h3>🎮 Mainkan Game Ular</h3>
                     <p>Klik untuk bermain</p>
                 </div>
             </a>
 
-            <a href="leaderboard/leaderboard.html" class="card-link">
+            <a href="../leaderboard/leaderboard.html" class="card-link">
                 <div class="card game-card">
                     <h3>leaderboard</h3>
                     <p>Klik untuk melihat leaderboard</p>

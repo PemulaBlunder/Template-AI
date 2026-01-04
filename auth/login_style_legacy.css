@@ -10,7 +10,7 @@
 body {
   font-family: "Kumbh Sans", sans-serif;
   height: 100vh;
-  background-image: url("image/login.png");
+  background-image: url("../image/login.png");
   color: #333;
   overflow: hidden;
 }
@@ -292,7 +292,7 @@ form {
 ================================ */
 .right-panel {
   width: 62%;
-  background-image: url("image/game-pattern-panel.png");
+  background-image: url("../image/game-pattern-panel.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

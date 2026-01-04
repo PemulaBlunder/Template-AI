@@ -1,9 +1,9 @@
 <?php
-require_once 'config.php';
+require_once '../databases/config.php';
 
 // Jika sudah login, redirect ke homepage
 if (isLoggedIn()) {
-    redirect('homepage.php');
+    redirect('../homepage/homepage.php');
 }
 
 $error = '';
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Login berhasil
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
-            redirect('homepage.php');
+            redirect('../homepage/homepage.php');
         } else {
             $error = 'Username/email atau password salah!';
         }
@@ -95,9 +95,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <!-- ================= SOCIAL ICONS ================= -->
             <div class="social-icons">
-                <a href="#"><img src="image/gmail.png" alt="Gmail" /></a>
-                <a href="#"><img src="image/instagram.png" alt="Instagram" /></a>
-                <a href="#"><img src="image/linkedin.png" alt="LinkedIn" /></a>
+                <a href="#"><img src="../image/gmail.png" alt="Gmail" /></a>
+                <a href="#"><img src="../image/instagram.png" alt="Instagram" /></a>
+                <a href="#"><img src="../image/linkedin.png" alt="LinkedIn" /></a>
             </div>
 
             <!-- ================= FOOTER ================= -->

@@ -7,7 +7,7 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET');
 
 // Koneksi database
-require_once '../config.php'; // Sesuaikan path
+require_once '../databases/config.php'; // Sesuaikan path
 
 // Fungsi untuk mendapatkan leaderboard overall
 function getOverallLeaderboard($pdo, $limit = 10) {
