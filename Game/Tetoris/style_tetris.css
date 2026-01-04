@@ -10,6 +10,21 @@ body {
   place-items: center;
 }
 
+.btn-back {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 8px 14px;
+  background: #1e2a4a;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.btn-back:hover {
+  background: #2f3e6f;
+}
+
 .wrap { width: min(980px, 94vw); padding: 18px 0; }
 
 .top {

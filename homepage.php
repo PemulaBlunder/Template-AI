@@ -387,17 +387,24 @@ if (isset($_POST['update_photo']) && isset($_FILES['photo'])) {
                 </form>
             </div>
 
-            <a href="Game/Tetoris/index.html" class="card-link">
+            <a href="Game/Tetoris/index_tetris.html" class="card-link">
                 <div class="card game-card">
                     <h3>🎮 Mainkan Game Tetris</h3>
                     <p>Klik untuk bermain</p>
                 </div>
             </a>
 
-            <a href="Game/Snake/index.html" class="card-link">
+            <a href="Game/Snake/index_snake.html" class="card-link">
                 <div class="card game-card">
                     <h3>🎮 Mainkan Game Ular</h3>
                     <p>Klik untuk bermain</p>
+                </div>
+            </a>
+
+            <a href="leaderboard/leaderboard.html" class="card-link">
+                <div class="card game-card">
+                    <h3>leaderboard</h3>
+                    <p>Klik untuk melihat leaderboard</p>
                 </div>
             </a>
 

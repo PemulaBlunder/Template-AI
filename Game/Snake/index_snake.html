@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Snake - Localhost</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style_snake.css">
+</head>
+
+<body>
+  <main class="wrap">
+    <header class="top">
+      <h1>🐍 Snake</h1>
+      <div class="stats">
+        <div>Skor: <span id="score">0</span></div>
+        <div>Best: <span id="best">0</span></div>
+        <div>Status: <span id="status">Ready</span></div>
+      </div>
+      <a href="../../homepage.php" class="btn-back">⬅ Kembali</a>
+    </header>
+
+    <section class="panel">
+      <canvas id="game" width="420" height="420"></canvas>
+
+      <aside class="side">
+        <div class="card">
+          <h3>Kontrol</h3>
+          <ul>
+            <li>⬅️⬆️➡️⬇️ : gerak</li>
+            <li>WASD : gerak</li>
+            <li>P : pause</li>
+            <li>R : restart</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Difficulty</h3>
+          <div class="difficulty-group">
+            <button class="difficulty-btn" data-diff="EASY">Easy</button>
+            <button class="difficulty-btn active" data-diff="NORMAL">Normal</button>
+            <button class="difficulty-btn" data-diff="HARD">Hard</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <button id="btnStart">Start</button>
+          <button id="btnPause">Pause</button>
+          <button id="btnRestart">Restart</button>
+        </div>
+      </aside>
+    </section>
+
+  </main>
+
+  <!-- JS -->
+  <script src="./snake.js"></script>
+</body>
+</html>

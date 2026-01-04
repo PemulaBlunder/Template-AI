@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leaderboard - Game Portal</title>
+  <link rel="stylesheet" href="style_leaderboard.css">
+</head>
+
+<body>
+  <main class="wrap">
+    <header class="top">
+      <h1>🏆 Leaderboard</h1>
+      <a href="../homepage.php" class="btn-back">⬅ Kembali</a>
+    </header>
+
+    <section class="tabs">
+      <button class="tab-btn active" data-tab="overall">
+        🌟 Overall
+      </button>
+      <button class="tab-btn" data-tab="snake">
+        🐍 Snake
+      </button>
+      <button class="tab-btn" data-tab="tetris">
+        🎮 Tetris
+      </button>
+    </section>
+
+    <section class="content">
+      <!-- OVERALL LEADERBOARD -->
+      <div class="tab-content active" id="tab-overall">
+        <div class="board-header">
+          <h2>Overall Rankings</h2>
+          <p class="subtitle">Top 5 players by total score across all games</p>
+        </div>
+        
+        <div class="leaderboard-card">
+          <table class="leaderboard-table">
+            <thead>
+              <tr>
+                <th class="rank-col">Rank</th>
+                <th class="player-col">Player</th>
+                <th class="score-col">Total Score</th>
+              </tr>
+            </thead>
+            <tbody id="overall-tbody">
+              <tr class="loading-row">
+                <td colspan="3">
+                  <div class="loader"></div>
+                  <p>Loading leaderboard...</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SNAKE LEADERBOARD -->
+      <div class="tab-content" id="tab-snake">
+        <div class="board-header">
+          <h2>🐍 Snake Rankings</h2>
+          <p class="subtitle">Top 5 highest scores in Snake</p>
+        </div>
+        
+        <div class="leaderboard-card">
+          <table class="leaderboard-table">
+            <thead>
+              <tr>
+                <th class="rank-col">Rank</th>
+                <th class="player-col">Player</th>
+                <th class="score-col">Best Score</th>
+              </tr>
+            </thead>
+            <tbody id="snake-tbody">
+              <tr class="loading-row">
+                <td colspan="3">
+                  <div class="loader"></div>
+                  <p>Loading leaderboard...</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TETRIS LEADERBOARD -->
+      <div class="tab-content" id="tab-tetris">
+        <div class="board-header">
+          <h2>🎮 Tetris Rankings</h2>
+          <p class="subtitle">Top 5 highest scores in Tetris</p>
+        </div>
+        
+        <div class="leaderboard-card">
+          <table class="leaderboard-table">
+            <thead>
+              <tr>
+                <th class="rank-col">Rank</th>
+                <th class="player-col">Player</th>
+                <th class="score-col">Best Score</th>
+              </tr>
+            </thead>
+            <tbody id="tetris-tbody">
+              <tr class="loading-row">
+                <td colspan="3">
+                  <div class="loader"></div>
+                  <p>Loading leaderboard...</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="leaderboard.js"></script>
+</body>
+</html>
