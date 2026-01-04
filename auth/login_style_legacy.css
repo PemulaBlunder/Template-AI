@@ -149,21 +149,7 @@ form {
 /* ===============================
    Password toggle
 ================================ */
-.password-container {
-  position: relative;
-}
 
-.toggle-btn {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: #00ff88;
-  cursor: pointer;
-  font-size: 0.9rem;
-}
 
 /* ===============================
    Error text
@@ -191,35 +177,6 @@ form {
   cursor: pointer;
   margin-bottom: 6px; /* ⬅️ lebih rapat */
   transition: all 0.3s ease;
-}
-
-.divider {
-  display: flex;
-  align-items: center;
-  margin: 14px 0; /* ⬅️ dari 25px → 14px */
-  color: #02103e;
-  font-size: 0.85rem;
-  letter-spacing: 2px;
-}
-
-.divider::before,
-.divider::after {
-  content: "";
-  flex: 1;
-  height: 2px;
-  background-color: #02103e;
-}
-
-.divider::before {
-  margin-right: 12px;
-}
-
-.divider::after {
-  margin-left: 12px;
-}
-
-.divider span {
-  font-weight: 600;
 }
 
 .primary-btn {

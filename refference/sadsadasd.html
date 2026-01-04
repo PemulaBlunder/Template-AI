@@ -1,315 +1,286 @@
-<!DOCTYPE html>
-<html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Login - Sidebar</title>
-
-    <style>
-      :root {
-        --navy: #071b49;
-        --navy-2: #0a225e;
-        --text: #0b0f1a;
-        --muted: #6b7280;
-        --line: #0a225e;
-        --border: #d1d5db;
-        --bg: #ffffff;
-        --radius: 6px;
-        --sidebar-w: 86px;
-      }
-
-      .mb-44 {
-        margin-bottom: 44px;
-      }
-      .mb-15 {
-        margin-bottom: 15px;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial,
-          sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        min-height: 100vh;
-      }
-
-      /* ====== Layout utama ====== */
-      .page {
-        min-height: 100vh;
-        display: flex;
-      }
-
-      /* ====== Sidebar kiri ====== */
-      .sidebar {
-        width: var(--sidebar-w);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-      }
-
-      /* Container item vertikal */
-      .side-items {
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        z-index: 1;
-      }
-
-      /* Teks vertikal */
-      .side-item {
-        writing-mode: vertical-rl; /* tulisan vertikal */
-        transform: rotate(180deg); /* agar terbaca dari bawah ke atas */
-        letter-spacing: 0.14em;
-        font-weight: 700;
-        font-size: 13px;
-        color: var(--navy);
-        text-decoration: none;
-        user-select: none;
-      }
-
-      /* “EN” dibuat aksen merah/magenta */
-      .side-item.is-active {
-        color: #c026d3;
-      }
-
-      .side-item:hover {
-        background: rgba(7, 27, 73, 0.07);
-      }
-
-      /* ====== Area konten (form) ====== */
-      .content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        padding: 72px 24px 24px;
-        position: relative;
-      }
-
-      /* kotak form */
-      .card {
-        width: min(420px, 100%);
-        margin-left: 32px; /* geser ke kanan sedikit dari sidebar */
-      }
-
-      .brand {
-        font-weight: 900;
-        letter-spacing: 0.08em;
-        color: var(--navy);
-        font-size: 46px;
-        margin: 0 0 18px;
-        text-transform: uppercase;
-      }
-
-      .field {
-        margin: 14px 0;
-      }
-
-      label {
-        display: block;
-        font-size: 12px;
-        font-weight: 700;
-        color: #374151;
-        margin: 0 0 6px;
-      }
-
-      input {
-        width: 100%;
-        height: 38px;
-        border: 1px solid var(--border);
-        border-radius: 3px;
-        outline: none;
-        padding: 0 12px;
-        font-size: 14px;
-      }
-
-      input:focus {
-        border-color: var(--navy-2);
-        box-shadow: 0 0 0 3px rgba(10, 34, 94, 0.12);
-      }
-
-      .btn {
-        width: 100%;
-        height: 40px;
-        margin-top: 10px;
-        border: none;
-        border-radius: 4px;
-        background: var(--navy);
-        color: white;
-        font-weight: 700;
-        cursor: pointer;
-      }
-
-      .btn:hover {
-        background: var(--navy-2);
-      }
-
-      .helper {
-        margin-top: 12px;
-        font-size: 12px;
-        color: var(--muted);
-        text-align: center;
-      }
-
-      .helper a {
-        color: var(--navy);
-        font-weight: 700;
-        text-decoration: none;
-      }
-
-      /* ====== Footer bawah kiri ====== */
-      .footer {
-        margin-top: auto;
-        padding: 22px 32px;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        color: var(--muted);
-        font-size: 12px;
-      }
-
-      .footer a {
-        color: var(--muted);
-        text-decoration: none;
-        font-weight: 600;
-      }
-
-      .footer a:hover {
-        color: var(--navy);
-      }
-
-      .footer .line {
-        height: 2px;
-        background: var(--navy);
-        width: 140px;
-        margin-left: 12px;
-        opacity: 0.9;
-      }
-
-      /* ====== Ikon sosial kanan bawah ====== */
-      .social {
-        position: fixed;
-        right: 22px;
-        bottom: 22px;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-      }
-
-      .social a {
-        width: 34px;
-        height: 34px;
-        display: grid;
-        place-items: center;
-        border-radius: 8px;
-        color: var(--navy);
-        background: #fff;
-        border: 1px solid rgba(10, 34, 94, 0.15);
-        text-decoration: none;
-        font-weight: 900;
-      }
-
-      .social a:hover {
-        background: rgba(7, 27, 73, 0.06);
-      }
-
-      /* ====== Responsif ====== */
-      @media (max-width: 520px) {
-        :root {
-          --sidebar-w: 72px;
-        }
-        .content {
-          padding-top: 56px;
-        }
-        .card {
-          margin-left: 12px;
-        }
-        .brand {
-          font-size: 40px;
-        }
-        .footer {
-          padding: 18px 12px;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="page">
-      <!-- Sidebar kiri -->
-      <aside class="sidebar" aria-label="Sidebar">
-        <nav class="side-items">
-          <div class="side-item mb-44">
-            <img
-              src="image/Vector 89.png"
-              alt="icon"
-              style="width: 2px; height: 300px"
-            />
-          </div>
-
-          <a class="side-item is-active mb-15" href="#">EN</a>
-
-          <div class="side-item mb-15">
-            <img
-              src="image/Vector 90.png"
-              alt="icon"
-              style="width: 2px; height: 26px"
-            />
-          </div>
-
-          <a class="side-item mb-44" href="#">ID</a>
-
-          <a class="side-item" href="#">HELP</a>
-        </nav>
-      </aside>
-
-      <!-- Konten utama -->
-      <main class="content">
-        <section class="card">
-          <h1 class="brand">LEVITAS</h1>
-
-          <form>
-            <div class="field">
-              <label for="username">Username</label>
-              <input id="username" type="text" placeholder="" />
-            </div>
-
-            <div class="field">
-              <label for="email">Email Address</label>
-              <input id="email" type="email" placeholder="" />
-            </div>
-
-            <div class="field">
-              <label for="password">Password</label>
-              <input id="password" type="password" placeholder="" />
-            </div>
-
-            <button class="btn" type="submit">Sign In</button>
-
-            <p class="helper">
-              Already have an Account? <a href="#">Log In</a>
-            </p>
-          </form>
-        </section>
-
-        <!-- Footer bawah kiri -->
-        <footer class="footer">
-          <a href="#">Legal Stuff</a>
-          <a href="#">Blogs</a>
-          <a href="#">Terms</a>
-          <span class="line" aria-hidden="true"></span>
-        </footer>
-      </main>
+<div>
+  <link href="test.css" rel="stylesheet" />
+  <div class="c_desktop5-frame1">
+    <div class="c_desktop5-text10">
+      <p class="c_desktop5-text11">LEVITAS</p>
     </div>
-
-    <!-- Social kanan bawah -->
-    <div class="social" aria-label="Social links">
-      <a href="#" title="Instagram">IG</a>
-      <a href="#" title="Twitter">TW</a>
+    <div class="c_desktop5-text12">
+      <p class="c_desktop5-text13">Play Without Weight</p>
     </div>
-  </body>
-</html>
+    <div class="c_desktop5-frame2">
+      <div class="c_desktop5-text14">
+        <p class="c_desktop5-text15">All Games</p>
+      </div>
+      <div class="c_desktop5-text16">
+        <p class="c_desktop5-text17">Game 1</p>
+      </div>
+      <div class="c_desktop5-text18">
+        <p class="c_desktop5-text19">Game 1</p>
+      </div>
+      <div class="c_desktop5-text20">
+        <p class="c_desktop5-text21">Game 1</p>
+      </div>
+      <div class="c_desktop5-text22">
+        <p class="c_desktop5-text23">Game 1</p>
+      </div>
+      <div class="c_desktop5-text24">
+        <p class="c_desktop5-text25">Game 1</p>
+      </div>
+      <div class="c_desktop5-text26">
+        <p class="c_desktop5-text27">Game 1</p>
+      </div>
+      <div class="c_desktop5-text28">
+        <p class="c_desktop5-text29">Sort by popularity</p>
+      </div>
+      <div class="c_desktop5-text30">
+        <p class="c_desktop5-text31">This game Made By Admin 1</p>
+      </div>
+      <div class="c_desktop5-text32">
+        <p class="c_desktop5-text33">This game Made By Admin 1</p>
+      </div>
+      <div class="c_desktop5-text34">
+        <p class="c_desktop5-text35">This game Made By Admin 1</p>
+      </div>
+      <div class="c_desktop5-text36">
+        <p class="c_desktop5-text37">This game Made By Admin 1</p>
+      </div>
+      <div class="c_desktop5-text38">
+        <p class="c_desktop5-text39">This game Made By Admin 1</p>
+      </div>
+      <div class="c_desktop5-text40">
+        <p class="c_desktop5-text41">This game Made By Admin 1</p>
+      </div>
+      <img
+        src="assets/222130.svg"
+        alt="rectangle"
+        width="188"
+        height="250"
+        class="c_desktop5-rectangle10"
+        />
+      <img
+        src="assets/222131.svg"
+        alt="rectangle"
+        width="188"
+        height="250"
+        class="c_desktop5-rectangle11"
+        />
+      <img
+        src="assets/222132.svg"
+        alt="rectangle"
+        width="188"
+        height="250"
+        class="c_desktop5-rectangle12"
+        />
+      <img
+        src="assets/222133.svg"
+        alt="rectangle"
+        width="188"
+        height="250"
+        class="c_desktop5-rectangle13"
+        />
+      <img
+        src="assets/222134.svg"
+        alt="rectangle"
+        width="188"
+        height="250"
+        class="c_desktop5-rectangle14"
+        />
+      <img
+        src="assets/222135.svg"
+        alt="rectangle"
+        width="188"
+        height="250"
+        class="c_desktop5-rectangle15"
+        />
+    </div>
+    <div class="c_desktop5-frame3">
+      <div class="c_desktop5-text42">
+        <p class="c_desktop5-text43">Leaderboard</p>
+      </div>
+      <img
+        src="assets/222138.svg"
+        alt="rectangle"
+        width="80"
+        height="100"
+        class="c_desktop5-rectangle16"
+        />
+      <img
+        src="assets/222139.svg"
+        alt="rectangle"
+        width="80"
+        height="100"
+        class="c_desktop5-rectangle17"
+        />
+      <img
+        src="assets/222140.svg"
+        alt="rectangle"
+        width="80"
+        height="100"
+        class="c_desktop5-rectangle18"
+        />
+      <img
+        src="assets/222141.svg"
+        alt="rectangle"
+        width="30"
+        height="20"
+        class="c_desktop5-rectangle19"
+        />
+      <img
+        src="assets/222142.svg"
+        alt="rectangle"
+        width="30"
+        height="20"
+        class="c_desktop5-rectangle20"
+        />
+      <img
+        src="assets/222143.svg"
+        alt="rectangle"
+        width="30"
+        height="20"
+        class="c_desktop5-rectangle21"
+        />
+      <div class="c_desktop5-text44"><p class="c_desktop5-text45">#1</p></div>
+      <div class="c_desktop5-text46">
+        <p class="c_desktop5-text47">Username</p>
+      </div>
+      <div class="c_desktop5-text48">
+        <p class="c_desktop5-text49">2000 Xp</p>
+      </div>
+      <div class="c_desktop5-text50">
+        <p class="c_desktop5-text51">1500 Xp</p>
+      </div>
+      <div class="c_desktop5-text52">
+        <p class="c_desktop5-text53">100 Xp</p>
+      </div>
+      <div class="c_desktop5-text54">
+        <p class="c_desktop5-text55">Username</p>
+      </div>
+      <div class="c_desktop5-text56">
+        <p class="c_desktop5-text57">Username</p>
+      </div>
+      <div class="c_desktop5-text58"><p class="c_desktop5-text59">#2</p></div>
+      <div class="c_desktop5-text60"><p class="c_desktop5-text61">#3</p></div>
+      <div class="c_desktop5-group1">
+        <div class="c_desktop5-text62">
+          <p class="c_desktop5-text63">More</p>
+        </div>
+        <img
+          src="assets/222155.svg"
+          alt="vector"
+          width="25.5"
+          height="7.3642578125"
+          class="c_desktop5-vector1"
+          />
+      </div>
+    </div>
+    <div class="c_desktop5-frame4">
+      <img
+        src="assets/222157.jpg"
+        alt="rectangle"
+        width="651"
+        height="262"
+        class="c_desktop5-rectangle22"
+        />
+      <img
+        src="assets/222158.png"
+        alt="rectangle"
+        width="200"
+        height="201"
+        class="c_desktop5-rectangle23"
+        />
+      <div class="c_desktop5-group2">
+        <img
+          src="assets/222160.svg"
+          alt="booleanope"
+          width="103.396484375"
+          height="86.630859375"
+          class="c_desktop5-booleanope1"
+          />
+        <div class="c_desktop5-text64">
+          <p class="c_desktop5-text65">Nah, i’d win.</p>
+        </div>
+      </div>
+    </div>
+    <div class="c_desktop5-frame5">
+      <div class="c_desktop5-group3">
+        <div class="c_desktop5-group4">
+          <img
+            src="assets/222167.svg"
+            alt="vector"
+            width="100"
+            height="2"
+            class="c_desktop5-vector2"
+            />
+          <div class="c_desktop5-text66">
+            <p class="c_desktop5-text67">Legal Stuff</p>
+          </div>
+          <div class="c_desktop5-text68">
+            <p class="c_desktop5-text69">Blogs</p>
+          </div>
+          <div class="c_desktop5-text70">
+            <p class="c_desktop5-text71">Terms</p>
+          </div>
+        </div>
+        <img
+          src="assets/222171.png"
+          alt="rectangle"
+          width="25"
+          height="25"
+          class="c_desktop5-rectangle24"
+          />
+        <img
+          src="assets/222172.png"
+          alt="rectangle"
+          width="25"
+          height="25"
+          class="c_desktop5-rectangle25"
+          />
+        <img
+          src="assets/222173.png"
+          alt="rectangle"
+          width="25"
+          height="25"
+          class="c_desktop5-rectangle26"
+          />
+      </div>
+    </div>
+    <img
+      src="assets/222174.svg"
+      alt="vector"
+      width="2"
+      height="390"
+      class="c_desktop5-vector3"
+      />
+    <img
+      src="assets/222175.svg"
+      alt="vector"
+      width="2"
+      height="300"
+      class="c_desktop5-vector4"
+      />
+    <div class="c_desktop5-group5">
+      <img
+        src="assets/222177.svg"
+        alt="vector"
+        width="2"
+        height="26"
+        class="c_desktop5-vector5"
+        />
+      <div class="c_desktop5-text72"><p class="c_desktop5-text73">EN</p></div>
+      <div class="c_desktop5-text74"><p class="c_desktop5-text75">ID</p></div>
+    </div>
+    <div class="c_desktop5-text76"><p class="c_desktop5-text77">hELP</p></div>
+    <div class="c_desktop5-group6">
+      <img
+        src="assets/222182.svg"
+        alt="booleanope"
+        width="40"
+        height="40"
+        class="c_desktop5-booleanope2"
+        />
+      <div class="c_desktop5-text78">
+        <p class="c_desktop5-text79">teuku Encant tes 1234 yoisadsad</p>
+      </div>
+    </div>
+  </div>
+</div>
