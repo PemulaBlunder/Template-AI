@@ -210,17 +210,15 @@ class CollisionDetector {
 }
 
 // Class untuk scoring system
-class ScoreManager {
+class TetrisScoreManager extends BaseScoreManager {
   constructor(difficulty) {
-    this.difficulty = difficulty;
-    this.score = 0;
+    super(difficulty, "tetris"); // gameKey = "tetris"
     this.lines = 0;
     this.level = 1;
-    this.best = Number(localStorage.getItem("tetris_best") || 0);
   }
 
   reset() {
-    this.score = 0;
+    super.reset();
     this.lines = 0;
     this.level = 1;
   }
@@ -233,6 +231,9 @@ class ScoreManager {
     this.lines += cleared;
 
     const newLevel = Math.floor(this.lines / Config.LINES_PER_LEVEL) + 1;
+    if (newLevel !== this.level) this.level = newLevel;
+
+    this.updateBest();
     return newLevel !== this.level ? newLevel : null;
   }
 
@@ -246,16 +247,8 @@ class ScoreManager {
     this.updateBest();
   }
 
-  updateBest() {
-    if (this.score > this.best) {
-      this.best = this.score;
-      localStorage.setItem("tetris_best", String(this.best));
-    }
-  }
-
-  getDropInterval() {
+  getGameInterval() {
     const diff = Config.DIFFICULTY[this.difficulty];
-
     return Math.max(
       diff.MIN_DROP,
       diff.BASE_DROP - (this.level - 1) * Config.DROP_SPEED_DECREASE
@@ -377,16 +370,17 @@ class Renderer {
 }
 
 // Main Game class
-class TetrisGame {
+class TetrisGame extends BaseGame {
   constructor() {
+    super("tetris"); // kirim gameKey ke BaseGame
     this.initDOM();
-    this.initComponents();
-    this.initState();
-    this.setupEventListeners();
     this.setDifficulty("NORMAL");
+    this.initComponents();
     this.reset();
+    this.setupEventListeners();
   }
 
+  // ⚡ Implement abstract method
   initDOM() {
     this.elements = {
       boardCanvas: document.getElementById("board"),
@@ -404,7 +398,7 @@ class TetrisGame {
 
   initComponents() {
     this.grid = new Grid();
-    this.scoreManager = new ScoreManager(this.difficulty);
+    this.scoreManager = new TetrisScoreManager(this.difficulty);
     this.collisionDetector = new CollisionDetector(this.grid);
     this.renderer = new Renderer(
       this.elements.boardCanvas,
@@ -412,182 +406,28 @@ class TetrisGame {
     );
   }
 
-  initState() {
-    this.running = false;
-    this.paused = false;
-    this.gameOver = false;
-    this.lastTime = 0;
-    this.dropAcc = 0;
-  }
-
   reset() {
+    // Reset state BaseGame
+    this.initState(); // <- penting agar running, paused, gameOver kembali normal
+
+    // Reset komponen game
     this.grid.reset();
     this.scoreManager.reset();
-    this.initState();
 
     this.currentPiece = Piece.random();
     this.nextPiece = Piece.random();
 
     this.updateHUD();
     this.setStatus("Ready");
-    this.render();
   }
 
-  start() {
-    if (this.gameOver) this.reset();
-
-    if (!this.running) {
-      this.running = true;
-      this.paused = false;
-      this.setStatus("Playing");
-      this.lastTime = performance.now();
-      this.dropAcc = 0;
-      requestAnimationFrame((t) => this.loop(t));
-    }
-  }
-
-  togglePause() {
-    if (!this.running && !this.paused) return;
-
-    this.paused = !this.paused;
-    this.setStatus(this.paused ? "Paused" : "Playing");
-
-    if (!this.paused) {
-      this.lastTime = performance.now();
-      requestAnimationFrame((t) => this.loop(t));
-    }
-  }
-
-  loop(now) {
-    if (!this.running || this.paused) return;
-
-    const dt = now - this.lastTime;
-    this.lastTime = now;
-
-    this.dropAcc += dt;
-    const dropInterval = this.scoreManager.getDropInterval();
-
-    if (this.dropAcc >= dropInterval) {
-      this.stepDown();
-      this.dropAcc = 0;
-    }
-
-    this.render();
-    requestAnimationFrame((t) => this.loop(t));
-  }
-
-  stepDown() {
+  update() {
+    // main game logic
     if (!this.collisionDetector.check(this.currentPiece, 0, 1)) {
       this.currentPiece.y++;
     } else {
       this.lockPiece();
     }
-  }
-
-  lockPiece() {
-    this.grid.mergePiece(this.currentPiece);
-
-    const cleared = this.grid.clearLines();
-    const newLevel = this.scoreManager.addLines(cleared);
-
-    if (newLevel) {
-      this.scoreManager.level = newLevel;
-    }
-
-    this.scoreManager.updateBest();
-    this.updateHUD();
-
-    this.currentPiece = this.nextPiece;
-    this.nextPiece = Piece.random();
-
-    if (this.collisionDetector.check(this.currentPiece, 0, 0)) {
-      this.endGame();
-    }
-  }
-
-  endGame() {
-    this.running = false;
-    this.gameOver = true;
-    this.setStatus("Game Over");
-    this.scoreManager.updateBest();
-    this.updateHUD();
-    this.render();
-
-    sendScoreToServer(this.scoreManager.score);
-  }
-
-  moveLeft() {
-    if (!this.canMove()) return;
-    if (!this.collisionDetector.check(this.currentPiece, -1, 0)) {
-      this.currentPiece.x--;
-    }
-  }
-
-  moveRight() {
-    if (!this.canMove()) return;
-    if (!this.collisionDetector.check(this.currentPiece, 1, 0)) {
-      this.currentPiece.x++;
-    }
-  }
-
-  softDrop() {
-    if (!this.canMove()) return;
-    if (!this.collisionDetector.check(this.currentPiece, 0, 1)) {
-      this.currentPiece.y++;
-      this.scoreManager.addSoftDrop();
-      this.updateHUD();
-    }
-  }
-
-  hardDrop() {
-    if (!this.canMove()) return;
-
-    let distance = 0;
-    while (!this.collisionDetector.check(this.currentPiece, 0, distance + 1)) {
-      distance++;
-    }
-
-    this.currentPiece.y += distance;
-    this.scoreManager.addHardDrop(distance);
-    this.lockPiece();
-  }
-
-  rotate(direction) {
-    if (!this.canMove()) return;
-
-    const rotated =
-      direction === "CW"
-        ? this.currentPiece.rotateCW()
-        : this.currentPiece.rotateCCW();
-
-    const kicks = [
-      { x: 0, y: 0 },
-      { x: -1, y: 0 },
-      { x: 1, y: 0 },
-      { x: -2, y: 0 },
-      { x: 2, y: 0 },
-      { x: 0, y: -1 },
-    ];
-
-    for (const kick of kicks) {
-      if (
-        !this.collisionDetector.check(
-          this.currentPiece,
-          kick.x,
-          kick.y,
-          rotated
-        )
-      ) {
-        this.currentPiece.shape = rotated;
-        this.currentPiece.x += kick.x;
-        this.currentPiece.y += kick.y;
-        return;
-      }
-    }
-  }
-
-  canMove() {
-    return this.running && !this.paused && !this.gameOver;
   }
 
   render() {
@@ -606,47 +446,8 @@ class TetrisGame {
     this.elements.best.textContent = this.scoreManager.best;
   }
 
-  setStatus(text) {
-    this.elements.status.textContent = text;
-  }
-
-  setupEventListeners() {
-    this.elements.btnStart.addEventListener("click", () => this.start());
-    this.elements.btnPause.addEventListener("click", () => this.togglePause());
-    this.elements.btnRestart.addEventListener("click", () => {
-      this.reset();
-      this.start();
-    });
-
-    const diffButtons = document.querySelectorAll(".difficulty-btn");
-
-    diffButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const diff = btn.dataset.diff;
-
-        this.setDifficulty(diff);
-
-        diffButtons.forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-      });
-    });
-
-    window.addEventListener("keydown", (e) => this.handleKeyDown(e));
-  }
-
-  handleKeyDown(e) {
+  handleGameKeyDown(e) {
     const key = e.key.toLowerCase();
-
-    if (key === "p") {
-      this.togglePause();
-      return;
-    }
-
-    if (key === "r") {
-      this.reset();
-      this.start();
-      return;
-    }
 
     if (!this.canMove()) return;
 
@@ -674,12 +475,74 @@ class TetrisGame {
     }
   }
 
-  setDifficulty(diff) {
-    if (this.running) return;
+  // ===== Game logic methods =====
+  moveLeft() {
+    if (!this.collisionDetector.check(this.currentPiece, -1, 0))
+      this.currentPiece.x--;
+  }
 
-    this.difficulty = diff;
-    this.scoreManager.difficulty = diff;
-    this.setStatus(`Difficulty: ${diff}`);
+  moveRight() {
+    if (!this.collisionDetector.check(this.currentPiece, 1, 0))
+      this.currentPiece.x++;
+  }
+
+  softDrop() {
+    if (!this.collisionDetector.check(this.currentPiece, 0, 1)) {
+      this.currentPiece.y++;
+      this.scoreManager.addSoftDrop();
+      this.updateHUD();
+    }
+  }
+
+  hardDrop() {
+    let distance = 0;
+    while (!this.collisionDetector.check(this.currentPiece, 0, distance + 1))
+      distance++;
+    this.currentPiece.y += distance;
+    this.scoreManager.addHardDrop(distance);
+    this.lockPiece();
+  }
+
+  rotate(direction) {
+    const rotated =
+      direction === "CW"
+        ? this.currentPiece.rotateCW()
+        : this.currentPiece.rotateCCW();
+    const kicks = [
+      { x: 0, y: 0 },
+      { x: -1, y: 0 },
+      { x: 1, y: 0 },
+      { x: -2, y: 0 },
+      { x: 2, y: 0 },
+      { x: 0, y: -1 },
+    ];
+
+    for (const k of kicks) {
+      if (!this.collisionDetector.check(this.currentPiece, k.x, k.y, rotated)) {
+        this.currentPiece.shape = rotated;
+        this.currentPiece.x += k.x;
+        this.currentPiece.y += k.y;
+        return;
+      }
+    }
+  }
+
+  lockPiece() {
+    this.grid.mergePiece(this.currentPiece);
+
+    const cleared = this.grid.clearLines();
+    const newLevel = this.scoreManager.addLines(cleared);
+    if (newLevel) this.scoreManager.level = newLevel;
+
+    this.scoreManager.updateBest();
+    this.updateHUD();
+
+    this.currentPiece = this.nextPiece;
+    this.nextPiece = Piece.random();
+
+    if (this.collisionDetector.check(this.currentPiece, 0, 0)) {
+      this.endGame();
+    }
   }
 }
 
