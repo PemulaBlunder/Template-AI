@@ -1,34 +1,117 @@
-* { 
-  box-sizing: border-box; 
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 body {
-  font-family: ui-sans-serif, system-ui, Segoe UI, Arial;
-  background: #0b1220;
-  color: #e8eefc;
+  font-family: "Kumbh Sans", sans-serif;
+  background: white;
   min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 20px 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
-.wrap { 
-  width: min(800px, 94vw); 
-  padding: 18px 0; 
+.wrap {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.top {
+/* Footer */
+.footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; /* sama seperti header */
+  font-size: 0.85rem;
+  color: #777;
+  margin-top: 24px;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-link {
+  color: #777;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #0a1a44;
+  text-decoration: underline;
+}
+
+.dot {
+  color: #aaa;
+}
+
+.footer-line {
+  margin-left: 10px;
+  width: 60px;
+  height: 2px;
+  background-color: #0a1a44;
+}
+
+.social-icons {
+  display: flex;
   gap: 16px;
+}
+
+.social-icons img {
+  width: 21px;
+  height: 21px;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.social-icons img:hover {
+  transform: scale(1.15);
+  opacity: 0.8;
+}
+
+/* Header Style - Mirip Homepage */
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 15px;
   margin-bottom: 24px;
 }
 
-h1 { 
-  margin: 0; 
+.logo {
+  margin-bottom: 16px;
+}
+
+.logo h1 {
+  font-family: "Jaro", sans-serif;
+  font-size: 48px;
+  color: #02103e;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 0;
+}
+
+.logo h2 {
+  font-family: "Kumbh Sans", sans-serif;
+  margin-top: -8px;
+  font-size: 12px;
+  color: #02103e;
+  letter-spacing: 0px;
+}
+
+h1 {
+  margin: 0;
   font-size: 32px;
   font-weight: 800;
   background: linear-gradient(135deg, #7cff6b, #2ee59d);
@@ -57,6 +140,7 @@ h1 {
 /* TABS */
 .tabs {
   display: flex;
+  width: 1000px;
   gap: 12px;
   margin-bottom: 24px;
   background: #0e1a33;
@@ -103,8 +187,14 @@ h1 {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .board-header {
@@ -128,7 +218,7 @@ h1 {
   border: 1px solid #1d2a4a;
   border-radius: 12px;
   padding: 0;
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
   overflow: hidden;
 }
 
@@ -277,7 +367,9 @@ h1 {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .loading-row p {
@@ -325,29 +417,55 @@ h1 {
 
 /* RESPONSIVE */
 @media (max-width: 640px) {
-  h1 { font-size: 24px; }
-  
-  .tabs { flex-direction: column; gap: 8px; }
-  
-  .tab-btn { padding: 10px 16px; font-size: 14px; }
-  
-  .board-header h2 { font-size: 20px; }
-  
+  h1 {
+    font-size: 24px;
+  }
+
+  .tabs {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .tab-btn {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .board-header h2 {
+    font-size: 20px;
+  }
+
   .leaderboard-table th,
   .leaderboard-table td {
     padding: 12px 8px;
     font-size: 13px;
   }
-  
-  .rank { width: 32px; height: 32px; font-size: 14px; }
-  
-  .player-avatar { width: 36px; height: 36px; font-size: 14px; }
-  
-  .player-info { gap: 8px; }
-  
-  .score-value { font-size: 16px; }
-  
-  .rank-col { width: 60px; }
-  
-  .score-col { width: 100px; }
+
+  .rank {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .player-avatar {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .player-info {
+    gap: 8px;
+  }
+
+  .score-value {
+    font-size: 16px;
+  }
+
+  .rank-col {
+    width: 60px;
+  }
+
+  .score-col {
+    width: 100px;
+  }
 }

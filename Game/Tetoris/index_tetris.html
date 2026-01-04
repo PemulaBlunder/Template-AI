@@ -5,49 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tetris - Localhost</title>
 
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght,YOPQ@500,300&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- CSS -->
     <link rel="stylesheet" href="./style_tetris.css" />
   </head>
 
   <body>
-    <main class="wrap">
-      <header class="top">
-        <h1>Tetris</h1>
-        <div class="stats">
-          <div>Skor: <span id="score">0</span></div>
-          <div>Lines: <span id="lines">0</span></div>
-          <div>Level: <span id="level">1</span></div>
-          <div>Best: <span id="best">0</span></div>
-          <div>Status: <span id="status">Ready</span></div>
+    <header class="top">
+      <a href="../../homepage/homepage.php">
+        <div class="logo">
+          <h1>LEVITAS</h1>
+          <h2>Play Without Weight</h2>
         </div>
-        <a href="../../homepage/homepage.php" class="btn-back">⬅ Kembali</a>
-      </header>
+      </a>
 
+      <div class="stats">
+        <div>Skor: <span id="score">0</span></div>
+        <div>Lines: <span id="lines">0</span></div>
+        <div>Level: <span id="level">1</span></div>
+        <div>Best: <span id="best">0</span></div>
+        <div>Status: <span id="status">Ready</span></div>
+      </div>
+    </header>
+
+    <main class="wrap">
       <section class="panel">
         <canvas id="board" width="320" height="640"></canvas>
 
         <aside class="side">
           <div class="card">
-            <h3>Next</h3>
+            <h3>Next Piece</h3>
             <canvas id="next" width="160" height="160"></canvas>
           </div>
 
           <div class="card">
-            <h3>Kontrol</h3>
-            <ul>
-              <li>← → : geser</li>
-              <li>↓ : soft drop</li>
-              <li>↑ / X : rotate</li>
-              <li>Z : rotate CCW</li>
-              <li>Space : hard drop</li>
-              <li>P : pause</li>
-              <li>R : restart</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>Difficulty</h3>
-
+            <h3>Kesulitan</h3>
             <div class="difficulty-group">
               <button class="difficulty-btn" data-diff="EASY">Easy</button>
               <button class="difficulty-btn active" data-diff="NORMAL">
@@ -55,19 +56,45 @@
               </button>
               <button class="difficulty-btn" data-diff="HARD">Hard</button>
             </div>
-          </div>
-
-          <div class="card">
-            <button id="btnStart">Start</button>
+            <h3></h3>
+            <button id="btnStart">Start Game</button>
             <button id="btnPause">Pause</button>
             <button id="btnRestart">Restart</button>
           </div>
+
+          <div class="card">
+            <h3>Kontrol</h3>
+            <ul>
+              <li>← → : Geser kiri/kanan</li>
+              <li>↓ : Soft drop</li>
+              <li>↑ / X : Rotate</li>
+              <li>Z : Rotate berlawanan</li>
+              <li>Space : Hard drop</li>
+              <li>P : Pause</li>
+              <li>R : Restart</li>
+            </ul>
+          </div>
         </aside>
       </section>
-
     </main>
 
-    <!-- JS -->
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="#" class="footer-link">Legal Stuff</a>
+        <span class="dot">·</span>
+        <a href="#" class="footer-link">Blogs</a>
+        <span class="dot">·</span>
+        <a href="#" class="footer-link">Terms</a>
+        <div class="footer-line"></div>
+      </div>
+
+      <div class="social-icons">
+        <a href="#"><img src="../../image/gmail.png" alt="Gmail" /></a>
+        <a href="#"><img src="../../image/instagram.png" alt="Instagram" /></a>
+        <a href="#"><img src="../../image/linkedin.png" alt="LinkedIn" /></a>
+      </div>
+    </footer>
+
     <script src="./tetoris.js"></script>
   </body>
 </html>

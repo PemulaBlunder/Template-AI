@@ -135,7 +135,7 @@ if (isset($_POST['update_photo']) && isset($_FILES['photo'])) {
             <h1>LEVITAS</h1>
             <h2>Play Without Weight</h2>
         </div>
-        
+
         <div class="fab-container">
             <div class="user-info">
                 <div class="fab">
@@ -215,24 +215,26 @@ if (isset($_POST['update_photo']) && isset($_FILES['photo'])) {
         </div>
 
         <!-- ================= FOOTER ================= -->
-        <footer class="footer">
-            <div class="footer-links">
-                <a href="" class="footer-link">Legal Stuff</a>
-                <span class="dot">·</span>
-                <a href="" class="footer-link">Blogs</a>
-                <span class="dot">·</span>
-                <a href="" class="footer-link">Terms</a>
-                <div class="footer-line"></div>
-            </div>
-
-            <div class="social-icons">
-                <a href=""><img src="../image/gmail.png" alt="Gmail" /></a>
-                <a href=""><img src="../image/instagram.png" alt="Instagram" /></a>
-                <a href=""><img src="../image/linkedin.png" alt="LinkedIn" /></a>
-            </div>
-        </footer>
 
     </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="" class="footer-link">Legal Stuff</a>
+            <span class="dot">·</span>
+            <a href="" class="footer-link">Blogs</a>
+            <span class="dot">·</span>
+            <a href="" class="footer-link">Terms</a>
+            <div class="footer-line"></div>
+        </div>
+
+        <div class="social-icons">
+            <a href=""><img src="../image/gmail.png" alt="Gmail" /></a>
+            <a href=""><img src="../image/instagram.png" alt="Instagram" /></a>
+            <a href=""><img src="../image/linkedin.png" alt="LinkedIn" /></a>
+        </div>
+    </footer>
+
     <script src="../refference/script.js"></script>
 </body>
 

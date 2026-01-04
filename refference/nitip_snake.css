@@ -1,27 +1,5 @@
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-body {
-  font-family: "Kumbh Sans", sans-serif;
-  background: white;
-  min-height: 100vh;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.wrap {
-  flex: 1;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 /* Footer */
@@ -79,7 +57,41 @@ body {
   opacity: 0.8;
 }
 
-/* Header Style - Mirip Homepage */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  font-family: "Kumbh Sans", sans-serif;
+  background: white;
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-back {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 8px 14px;
+  background: #1e2a4a;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.btn-back:hover {
+  background: #2f3e6f;
+}
+
+.wrap {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .top {
   display: flex;
   justify-content: space-between;
@@ -110,21 +122,9 @@ body {
   letter-spacing: 0px;
 }
 
-.btn-back {
-  display: inline-block;
-  margin-bottom: 12px;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  text-decoration: none;
-  border-radius: 25px;
-  font-size: 14px;
-  font-weight: 600;
-  transition: all 0.3s;
-}
-
-.btn-back:hover {
-  transform: scale(1.05);
+h1 {
+  margin: 0;
+  font-size: 28px;
 }
 
 .stats {
@@ -146,44 +146,34 @@ body {
   color: #667eea;
 }
 
-/* Panel Container */
 .panel {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 24px;
-  padding: 0;
+  grid-template-columns: 440px 1fr;
+  gap: 16px;
 }
 
-/* Canvas Board - Card Style */
-#game {
+canvas {
+  width: 420px;
+  height: 420px;
   background: white;
   border: none;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
-/* Sidebar */
 .side {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  min-width: 282px;
+  gap: 12px;
 }
 
-.card-full {
-  grid-column: 1 / -1;
-}
-
-/* Card Style - Mirip Homepage */
 .card {
   background: white;
   border: none;
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  flex-direction: column;
-  gap: 12px;
   transition: all 0.3s;
 }
 
@@ -201,59 +191,40 @@ body {
   border-bottom: 2px solid #667eea;
 }
 
-/* Next Preview Canvas */
-#next {
-  background: #f8f9fa;
-  border: 2px solid #e0e0e0;
-  border-radius: 12px;
-  display: block;
-  margin: 8px auto 0;
-}
-
-/* Control List */
-ul {
-  margin: 0;
-  padding-left: 20px;
-  font-size: 14px;
-  line-height: 1.8;
-  color: #666;
-}
-
-ul li {
-  margin-bottom: 4px;
-}
-
-/* Difficulty Buttons */
 .difficulty-group {
   display: flex;
-  gap: 8px;
+  gap: 10px;
 }
 
 .difficulty-btn {
-  flex: 1;
-  padding: 10px 12px;
+  padding: 10px 16px;
   border-radius: 8px;
-  border: 2px solid #e0e0e0;
-  background: white;
-  color: #333;
+  border: 2px solid #444;
+  background: transparent;
+  color: #ddd;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s;
-  font-family: "Kumbh Sans", sans-serif;
+  transition: all 0.2s ease;
 }
 
 .difficulty-btn.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-color: transparent;
-  color: white;
+  background: #4f46e5;
+  border-color: #4f46e5;
+  color: #fff;
 }
 
 .difficulty-btn:not(.active):hover {
-  border-color: #667eea;
-  transform: translateY(-2px);
+  border-color: #4f46e5;
 }
 
-/* Action Buttons */
+ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
 button {
   width: 100%;
   padding: 12px;
@@ -286,23 +257,4 @@ button {
 button:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .panel {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .side {
-    width: 100%;
-    max-width: 400px;
-    grid-template-columns: 1fr;
-    min-width: auto;
-  }
-
-  .logo h1 {
-    font-size: 36px;
-  }
 }

@@ -1,60 +1,98 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Snake - Localhost</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Snake - Localhost</title>
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style_snake.css">
-</head>
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght,YOPQ@500,300&display=swap"
+      rel="stylesheet"
+    />
 
-<body>
-  <main class="wrap">
+    <!-- CSS -->
+    <link rel="stylesheet" href="./style_snake.css" />
+  </head>
+
+  <body>
+    <!-- Header -->
     <header class="top">
-      <h1>🐍 Snake</h1>
+      <a href="../../homepage/homepage.php">
+        <div class="logo">
+          <h1>LEVITAS</h1>
+          <h2>Play Without Weight</h2>
+        </div>
+      </a>
+
       <div class="stats">
         <div>Skor: <span id="score">0</span></div>
         <div>Best: <span id="best">0</span></div>
         <div>Status: <span id="status">Ready</span></div>
       </div>
-      <a href="../../homepage/homepage.php" class="btn-back">⬅ Kembali</a>
     </header>
 
-    <section class="panel">
-      <canvas id="game" width="420" height="420"></canvas>
+    <!-- Main Content -->
+    <main class="wrap">
+      <section class="panel">
+        <!-- Snake Canvas -->
+        <canvas id="game" width="420" height="420"></canvas>
 
-      <aside class="side">
-        <div class="card">
-          <h3>Kontrol</h3>
-          <ul>
-            <li>⬅️⬆️➡️⬇️ : gerak</li>
-            <li>WASD : gerak</li>
-            <li>P : pause</li>
-            <li>R : restart</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3>Difficulty</h3>
-          <div class="difficulty-group">
-            <button class="difficulty-btn" data-diff="EASY">Easy</button>
-            <button class="difficulty-btn active" data-diff="NORMAL">Normal</button>
-            <button class="difficulty-btn" data-diff="HARD">Hard</button>
+        <!-- Sidebar -->
+        <aside class="side">
+          <!-- Kontrol -->
+          <div class="card">
+            <h3>Kontrol</h3>
+            <ul>
+              <li>⬅️⬆️➡️⬇️ : Gerak</li>
+              <li>WASD : Gerak</li>
+              <li>P : Pause</li>
+              <li>R : Restart</li>
+            </ul>
           </div>
-        </div>
 
-        <div class="card">
-          <button id="btnStart">Start</button>
-          <button id="btnPause">Pause</button>
-          <button id="btnRestart">Restart</button>
-        </div>
-      </aside>
-    </section>
+          <!-- Kesulitan & Action -->
+          <div class="card">
+            <h3>Kesulitan</h3>
+            <div class="difficulty-group">
+              <button class="difficulty-btn" data-diff="EASY">Easy</button>
+              <button class="difficulty-btn active" data-diff="NORMAL">
+                Normal
+              </button>
+              <button class="difficulty-btn" data-diff="HARD">Hard</button>
+            </div>
+            <h3></h3>
+            <button id="btnStart">Start Game</button>
+            <button id="btnPause">Pause</button>
+            <button id="btnRestart">Restart</button>
+          </div>
+        </aside>
+      </section>
+    </main>
 
-  </main>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="#" class="footer-link">Legal Stuff</a>
+        <span class="dot">·</span>
+        <a href="#" class="footer-link">Blogs</a>
+        <span class="dot">·</span>
+        <a href="#" class="footer-link">Terms</a>
+        <div class="footer-line"></div>
+      </div>
 
-  <!-- JS -->
-  <script src="./snake.js"></script>
-</body>
+      <div class="social-icons">
+        <a href="#"><img src="../../image/gmail.png" alt="Gmail" /></a>
+        <a href="#"><img src="../../image/instagram.png" alt="Instagram" /></a>
+        <a href="#"><img src="../../image/linkedin.png" alt="LinkedIn" /></a>
+      </div>
+    </footer>
+
+    <!-- JS Snake -->
+    <script src="./snake.js"></script>
+  </body>
 </html>
