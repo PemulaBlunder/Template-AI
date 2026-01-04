@@ -10,7 +10,7 @@ header('Access-Control-Allow-Methods: GET');
 require_once '../config.php'; // Sesuaikan path
 
 // Fungsi untuk mendapatkan leaderboard overall
-function getOverallLeaderboard($pdo, $limit = 5) {
+function getOverallLeaderboard($pdo, $limit = 10) {
     $sql = "
         SELECT 
             u.id,
@@ -31,7 +31,7 @@ function getOverallLeaderboard($pdo, $limit = 5) {
 }
 
 // Fungsi untuk mendapatkan leaderboard per game
-function getGameLeaderboard($pdo, $gameKey, $limit = 5) {
+function getGameLeaderboard($pdo, $gameKey, $limit = 10) {
     $sql = "
         SELECT 
             u.id,
@@ -58,7 +58,7 @@ try {
     // Ambil parameter
     $type = $_GET['type'] ?? 'overall';
     $game = $_GET['game'] ?? '';
-    $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 5;
+    $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
     
     // Validasi limit (max 10)
     $limit = min(max($limit, 1), 10);
